@@ -1,7 +1,7 @@
 
 
 project link:
-https://loquacious-cobbler-1e8547.netlify.app/
+https://precious-pegasus-c8fdf0.netlify.app/
 
 
 Troubles:
