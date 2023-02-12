@@ -159,22 +159,24 @@ fetchCountriesInContinent(selectedContinent)
                         cities[i.country].push(city);
                     }
 
+                    console.log('mode', graphMode)
                     if(graphMode == null) {
                         localStorage.setItem('graphMode', 'continent');
+                        localStorage.setItem('selectedContinent', 'Europe');
                         graphMode = 'continent';
                     }
-
-                    if(graphMode == 'continent') {
-                        loadChart(countryNames, countryPopulations);
-
-                        //continent buttons
-                        addButtonsFromNames(continentNames, document.querySelector('#continents'), 
+    
+                    addButtonsFromNames(continentNames, document.querySelector('#continents'), 
                             function(event) {
                                 localStorage.setItem('selectedContinent', event.target.innerText);
                                 localStorage.setItem('graphMode', 'continent');
                                 window.location.reload();   
                             });
 
+                    if(graphMode == 'continent') {
+                        loadChart(countryNames, countryPopulations);
+
+                        //continent buttons
                         addButtonsFromNames(countryNames, document.querySelector('#countries'), 
                             function(event) {
                                 localStorage.setItem('selectedCountry', event.target.innerText);
@@ -185,14 +187,21 @@ fetchCountriesInContinent(selectedContinent)
                     else if(graphMode == 'country') {
                         let k;
                         let citiesInCountry = []
-                        console.log(selectedCountry)
-                        console.log(cities[selectedCountry])
+                        
+                        if(cities[selectedCountry] == undefined) {
+                            document.querySelector('p').classList.remove('hidden');
+                            return;
+                        }
+
                         for(k of cities[selectedCountry]) {
                             citiesInCountry.push(k.name);
                         }
                         let citiesPopulation = [];
                         for(k of cities[selectedCountry]) {
-                            citiesPopulation.push(k.populationCounts[-1]);
+                            let value = k.populationCounts.slice(-1)[0].value
+                            value = Number.parseInt(value)
+                            //value = Number.parseInt(value)
+                            citiesPopulation.push(value);
                         }
 
                         loadChart(citiesInCountry, citiesPopulation);
