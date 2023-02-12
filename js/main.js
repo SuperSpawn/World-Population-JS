@@ -5,6 +5,16 @@ const selectedContinent = localStorage.getItem('selectedContinent');
 const selectedCountry = localStorage.getItem('selectedCountry');
 const graphMode = localStorage.getItem('graphMode');
 
+console.log('hi')
+console.log(selectedContinent);
+if(selectedContinent == null) {
+    localStorage.setItem('selectedContinent', 'Europe');
+    localStorage.setItem('graphMode', 'continent');
+    window.location.reload();
+}
+
+
+
 let canvas;
 //
 
