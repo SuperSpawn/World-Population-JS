@@ -18,12 +18,16 @@ button {
     padding: 1rem 2rem;
 }
 #graph-container {
-    width: 30%;
+    width: 50%;
     height: 50vh;
 }
 
 
-
+p {
+    color: white;
+    font-size: 3rem;
+    text-align: center;
+}
 
 .spinner-container {
     display: flex;
